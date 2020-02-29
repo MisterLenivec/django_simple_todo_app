@@ -1,0 +1,16 @@
+<h3>Update Task</h3>
+
+<a href="{% url 'list' %}">Отмена</a>
+
+<p>Создан: {{ task.created }}</p>
+<p>Обновлен: {{ task.updated }}</p>
+
+<form method="POST" action="">
+  {% csrf_token %}
+  <p>Заголовок</p>
+  <p>{{ form.title }}</p>
+  <p>Описание</p>
+  <p>{{ form.description }}</p>
+  <p>Завершен: {{ form.complete }}</p>
+  <input type="submit" name="Update Task" value="Обновить">
+</form>

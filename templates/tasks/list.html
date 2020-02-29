@@ -1,0 +1,32 @@
+<h3>Leniva To-Do List</h3>
+
+{% if messages %}
+  {% for message in messages %}
+    <div class="{{ message.tags }}">
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+
+<form method="POST" action="/">
+  {% csrf_token %}
+  <p>Заголовок</p>
+  <p>{{ form.title }}</p>
+  <p>Описание</p>
+  <p>{{ form.description }}</p>
+  <input type="submit" name="Create task" value="Создать">
+</form>
+
+{% for task in tasks %}
+  <div>
+    <a href="{% url 'update_task' task.id %}">Редактировать</a>
+    <a href="{% url 'delete_task' task.id %}">Удалить</a>
+
+    {% if task.complete %}
+      <strike>{{ task }}</strike>
+    {% else %}
+      <span>{{ task }}</span>
+    {% endif %}
+
+  </div>
+{% endfor %}
