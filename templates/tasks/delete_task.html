@@ -1,8 +1,20 @@
-<p>Вы уверены что хотите удалить '{{ item }}'?</p>
+{% extends 'base.html' %}
 
-<a href="{% url 'list' %}">Отмена</a>
+{% load static %}
 
-<form method="POST" action="">
-  {% csrf_token %}
-  <input type="submit" name="Confirm" value="Подтвердить">
-</form>
+{% block title %}
+  Удалить задачу
+{% endblock %}
+
+{% block content %}
+  <h5 class="alert alert-danger">Удалить задачу</h5>
+  <p>Вы уверены что хотите удалить '{{ item }}'?</p>
+
+  <form method="POST" action="">
+    {% csrf_token %}
+    <div class="cancel_confirm_buttons">
+      <a href="{% url 'list' %}" class="btn btn-primary cancel_button">Отмена</a>
+    <input class="btn btn-danger confirm_button" type="submit" name="confirm" value="Подтвердить">
+    </div>
+  </form>
+{% endblock %}

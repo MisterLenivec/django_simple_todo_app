@@ -1,32 +1,37 @@
-<h3>Leniva To-Do List</h3>
+{% extends 'base.html' %}
 
-{% if messages %}
-  {% for message in messages %}
-    <div class="{{ message.tags }}">
-      {{ message }}
+{% load static %}
+
+{% block title %}
+  Список задач
+{% endblock %}
+
+{% block content %}
+  <form method="POST" action="/">
+    {% csrf_token %}
+    {{ form.title }}
+    {{ form.description }}
+    <input class="btn btn-outline-success big_btn" type="submit"
+           name="create_task" value="Создать">
+  </form>
+
+  {% for task in tasks %}
+    <div class="item-row row no-gutters align-items-center">
+      <div class="col-4">
+        <a href="{% url 'update_task' task.id %}"
+           class="btn btn-sm btn-info edit">Изменить</a>
+        <a href="{% url 'delete_task' task.id %}"
+           class="btn btn-sm btn-warning delete">Удалить</a>
+      </div>
+
+      <div class="col-8">
+        {% if task.complete %}
+          <strike>{{ task }}</strike>
+        {% else %}
+          <span>{{ task }}</span>
+        {% endif %}
+      </div>
+
     </div>
   {% endfor %}
-{% endif %}
-
-<form method="POST" action="/">
-  {% csrf_token %}
-  <p>Заголовок</p>
-  <p>{{ form.title }}</p>
-  <p>Описание</p>
-  <p>{{ form.description }}</p>
-  <input type="submit" name="Create task" value="Создать">
-</form>
-
-{% for task in tasks %}
-  <div>
-    <a href="{% url 'update_task' task.id %}">Редактировать</a>
-    <a href="{% url 'delete_task' task.id %}">Удалить</a>
-
-    {% if task.complete %}
-      <strike>{{ task }}</strike>
-    {% else %}
-      <span>{{ task }}</span>
-    {% endif %}
-
-  </div>
-{% endfor %}
+{% endblock %}

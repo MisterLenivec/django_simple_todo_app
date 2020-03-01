@@ -1,16 +1,28 @@
-<h3>Update Task</h3>
+{% extends 'base.html' %}
 
-<a href="{% url 'list' %}">Отмена</a>
+{% load static %}
 
-<p>Создан: {{ task.created }}</p>
-<p>Обновлен: {{ task.updated }}</p>
+{% block title %}
+  Редактировать задачу
+{% endblock %}
 
-<form method="POST" action="">
-  {% csrf_token %}
-  <p>Заголовок</p>
-  <p>{{ form.title }}</p>
-  <p>Описание</p>
-  <p>{{ form.description }}</p>
-  <p>Завершен: {{ form.complete }}</p>
-  <input type="submit" name="Update Task" value="Обновить">
-</form>
+{% block content %}
+  <h5 class="alert alert-success">Редактировать</h5>
+
+  <form method="POST" action="">
+    {% csrf_token %}
+    <p>{{ form.title }}</p>
+    <p>{{ form.description }}</p>
+    <p>
+      <label class="form-check-label" for="id_complete">Задача выполнена?</label>
+      {{ form.complete }}
+    </p>
+    <p>Создан: {{ task.created }}</p>
+    <p>Обновлен: {{ task.updated }}</p>
+    <div class="cancel_confirm_buttons">
+      <a href="{% url 'list' %}" class="btn btn-primary cancel_button">Отмена</a>
+      <input class="btn btn-success confirm_button" type="submit"
+             name="update_task" value="Обновить">
+    </div>
+  </form>
+{% endblock %}

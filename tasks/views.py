@@ -15,7 +15,7 @@ def index(request):
             form.save()
             messages.success(request, 'Задача успешно создана!')
         else:
-            messages.error(request, 'Задача не создана!')
+            messages.warning(request, 'Задача не создана!')
         return redirect('/')
 
     context = {'tasks': tasks, 'form': form}
@@ -33,7 +33,7 @@ def update_task(request, pk):
             form.save()
             messages.success(request, 'Задача успешно обновлена!')
         else:
-            messages.error(request, 'Задача не обновлена!')
+            messages.warning(request, 'Задача не обновлена!')
         return redirect('/')
 
     context = {'form': form, 'task': task}

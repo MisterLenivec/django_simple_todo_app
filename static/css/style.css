@@ -1,0 +1,74 @@
+body {
+  background-color: #e8e2fb;
+  font-family: 'Satisfy', cursive;
+}
+header {
+  background-color: #906abd;
+  height: 40px;
+  text-align: center;
+  font-size: 26px;
+}
+main {
+  max-width: 600px;
+  margin: 20px auto;
+  padding:20px;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+  box-shadow: 6px 2px 30px 0 rgba(0,0,0,0.75);
+}
+input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+input::placeholder, textarea::placeholder {
+  color: #898989;
+}
+textarea {
+  width: 100%;
+  height: 50px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border-radius: 5px;
+  border: 1px solid #9B9B9B;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  color: #212529;
+}
+a:active, a:hover, a:focus {
+  text-decoration: none;
+  color: #fff;
+}
+:active, :hover, :focus {
+    outline: 0;
+    outline-offset: 0;
+}
+.item-row {
+  background-color: #28821a;
+  margin: 10px 0;
+  padding: 20px 3px;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 16px;
+  box-shadow: 0 -1px 10px -4px rgba(0,0,0,0.75);
+}
+.edit, .delete {
+  width: 80px;
+  margin: 2px 0;
+}
+.confirm_button, .cancel_button {
+  width: 130px;
+}
+.big_btn {
+  height: 40px;
+  font-size: 18px;
+}
+.cancel_confirm_buttons {
+  text-align: right;
+}
+#id_complete {
+  width: auto;
+}
