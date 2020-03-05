@@ -1,9 +1,15 @@
 language: python
-dist: bionic
 python:
-  - "3.8"
+- '3.6'
+- '3.7'
+- '3.8'
+services:
+- postgresql
 install:
-  - pip install -r requirements.txt
+- pip install -r requirements.txt
 script:
-  - python manage.py test
-  - flake8
+- python manage.py test
+- flake8
+env:
+  global:
+    secure: WDYt5MbW5nW7cOQc9rbcp71A+WDLQHRmbuNC8y9OkQ8NcukLxuGpefDn5S9TO8u1soQswx9MOuRTuTsegcktZAQGRku9AT9IBTqowAbUwJx4LbASsyFkDLElTBOy93JxeS1qCd2DCMBvp/vup0gVd8L+DQtj95ijDpZ41hfPaEpLwU7SOtMG0hEFifH7hxs0Nh6qUHMjSs3w5XQ9D82jQnNezufFagcegStmUhzSOnAwe20rjzi/5h3nbU7VJR/PP2a791m1z83tTUXVnZLr6Uz0FWhUkY29j/SMtceO0ltNFWL5an2sxh3yPZR9h0xDUthn/fPKwQs9GEYs9UdTYiVGV90dvQSJ9t1yf1h6fs1WzP/gmPxOj8Nk/ehQheLBUhrtOTaoDuWlMQrZ8fQeX3ond7XBJgUVcHcvv9xjSQORuVv0L9j212JfKwHG9fwWoqNaARAl39EEPAtfjz40W/kFJgJcXK89wM0rTcRp/5COe4E0GbqiaLLkY2nGdaKk7Wiwi0R5xDoKmP446uGXyPq+2r9MxhdbS9XqhNXubPt0S447TIv3IBdMY8nddmF8m1SRi1srUGM/mZgnzZYakRXYhkg01SEhOOh1eS0pciCurjzEtY8RGJ4yV7CM1hqgbVuLTq2G6PimzKLv/SjDtGttNBdKuIhva/7chu9rhW8=
