@@ -1,6 +1,7 @@
 dist: bionic
 language: python
 python:
+  - "3.5"
   - '3.6'
   - '3.7'
   - '3.8'
@@ -8,8 +9,6 @@ services:
   - postgresql
 install:
   - pip install -r requirements.txt
-before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
 script:
   - python manage.py test
   - flake8
