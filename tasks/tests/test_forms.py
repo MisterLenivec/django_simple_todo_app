@@ -45,5 +45,6 @@ class TaskFormTests(TestCase):
         self.assertFalse(form.is_valid())
         self.assertEqual(
             form.errors,
-            {'title': ['Убедитесь, что это значение содержит не более 50 символов (сейчас 51).']}
+            {'title': ['Убедитесь, что это значение содержит не более 50 '
+                       'символов (сейчас 51).']}
         )
