@@ -8,5 +8,10 @@ class Task(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name="Создан")
     updated = models.DateTimeField(auto_now=True, verbose_name="Обновлен")
 
+    class Meta:
+        ordering = ('-updated',)
+        verbose_name = 'Задача'
+        verbose_name_plural = 'Задачи'
+
     def __str__(self):
         return self.title

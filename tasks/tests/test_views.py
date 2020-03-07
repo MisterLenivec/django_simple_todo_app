@@ -5,7 +5,10 @@ from tasks.models import Task
 from tasks.forms import TaskForm
 
 
-class TestViews(TestCase):
+class ViewsTests(TestCase):
+    """
+    Tests for task views
+    """
     # def setUp(self) -> None:
     #     self.page = self.client.get("/")
     #     self.task = Task.objects.create(title='test title',
@@ -55,7 +58,7 @@ class TestViews(TestCase):
         self.assertEqual(self.page.status_code, 200)
         self.assertTemplateUsed(self.page, 'tasks/delete_task.html')
 
-    def test_get_update_page_for_item_does_not_exist(self):
+    def test_get_update_page_for_task_does_not_exist(self):
         """
         Try update with invalid data test
         """
@@ -78,7 +81,8 @@ class TestViews(TestCase):
                                    'description': 'Some test description',
                                    'complete': True})
         self.assertEqual(Task.objects.count(), 2)
-        task = Task.objects.all()[1]
+        task = Task.objects.all()[0]
+        # Not [1] because Task model Meta ordering = ('-updated',)
         self.assertEqual(task.title, 'Second test task')
         self.assertEqual(task.description, 'Some test description')
         self.assertEqual(task.complete, True)

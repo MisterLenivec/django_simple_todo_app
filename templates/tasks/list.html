@@ -15,6 +15,8 @@
            name="create_task" value="Создать">
   </form>
 
+  <p class="text-center">{{ tasks.count }} карточек</p>
+
   {% for task in tasks %}
     <div class="item-row row no-gutters align-items-center">
       <div class="col-4">
