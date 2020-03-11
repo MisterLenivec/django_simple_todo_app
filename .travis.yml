@@ -31,6 +31,7 @@ before_script:
   - sudo mv -f geckodriver /usr/local/share/
   - sudo chmod +x /usr/local/share/geckodriver
   - sudo ln -s /usr/local/share/geckodriver /usr/local/bin/geckodriver
+  - sleep 3
 script:
   - whereis google-chrome-stable
   - whereis chromedriver
