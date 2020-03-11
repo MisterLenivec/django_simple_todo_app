@@ -1,6 +1,6 @@
-#Самый обычный to do list на django.
+# Самый обычный to do list на django.
 
-####simple to do app [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/MisterLenivec/django_simple_todo_app/blob/master/LICENSE)
+#### simple to do app [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/MisterLenivec/django_simple_todo_app/blob/master/LICENSE)
 
 ### Технологии:
 - Django 3
