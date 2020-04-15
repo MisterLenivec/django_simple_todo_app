@@ -15,13 +15,20 @@ class TaskModelTests(TestCase):
         task = Task()
         self.assertEqual(task.title, '')
 
+    def test_task_title_equal_expected_title(self):
+        """
+        If title not equal expected title, then False is returned.
+        """
+        task = Task(title='Test title')
+        task.save()
+        self.assertEqual(task.title, 'Test title')
+
     def test_complete_defaults_to_false(self):
         """
         If done not properly specified, then False is returned.
         """
         task = Task(title='Test title')
         task.save()
-        self.assertEqual(task.title, 'Test title')
         self.assertFalse(task.complete)
 
     def test_can_create_a_task_with_a_title_and_status_complete(self):
@@ -30,7 +37,7 @@ class TaskModelTests(TestCase):
         """
         task = Task(title='Test title', complete=True)
         task.save()
-        self.assertEqual(task.title, 'Test title')
+        self.assertEqual(task.title, 'Test title')  # No need?
         self.assertTrue(task.complete)
 
     def test_string_representation(self):
