@@ -17,8 +17,8 @@
       <label class="form-check-label" for="id_complete">Задача выполнена?</label>
       {{ form.complete }}
     </p>
-    <p>Создан: {{ task.created }}</p>
-    <p>Обновлен: {{ task.updated }}</p>
+    <p>Создан: <span id="task_created">{{ task.created }}</span></p>
+    <p>Обновлен: <span id="task_updated">{{ task.updated }}</span></p>
     <div class="cancel_confirm_buttons">
       <a href="{% url 'list' %}" class="btn btn-primary cancel_button">Отмена</a>
       <input class="btn btn-success confirm_button" type="submit"

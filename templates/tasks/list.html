@@ -15,7 +15,7 @@
            name="create_task" value="Создать">
   </form>
 
-  <p class="text-center">{{ tasks.count }} карточек</p>
+  <p class="text-center task_count">{{ tasks.count }} карточек</p>
 
   {% for task in tasks %}
     <div class="item-row row no-gutters align-items-center">
@@ -28,9 +28,9 @@
 
       <div class="col-8">
         {% if task.complete %}
-          <strike>{{ task }}</strike>
+          <strike class="task_complete">{{ task }}</strike>
         {% else %}
-          <span>{{ task }}</span>
+          <span class="task">{{ task }}</span>
         {% endif %}
       </div>
 
