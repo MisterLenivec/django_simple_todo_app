@@ -12,3 +12,4 @@ class MainPageLocators:
     CREATE_TASK_BUTTON = (By.NAME, 'create_task')
     TASK_COUNT_STRING = (By.CLASS_NAME, 'task_count_string')
     TASK_COUNT = (By.CLASS_NAME, 'task_count')
+    TASK_ROW = (By.CLASS_NAME, 'task_row')

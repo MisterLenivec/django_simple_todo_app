@@ -20,7 +20,7 @@
   </p>
 
   {% for task in tasks %}
-    <div class="item-row row no-gutters align-items-center">
+    <div class="item-row row no-gutters align-items-center task_row">
       <div class="col-4">
         <a href="{% url 'update_task' task.id %}"
            class="btn btn-sm btn-info edit">Изменить</a>
@@ -30,9 +30,9 @@
 
       <div class="col-8">
         {% if task.complete %}
-          <strike class="task_complete">{{ task }}</strike>
+          <strike class="task_name_complete">{{ task }}</strike>
         {% else %}
-          <span class="task">{{ task }}</span>
+          <span class="task_name">{{ task }}</span>
         {% endif %}
       </div>
 

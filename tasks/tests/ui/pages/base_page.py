@@ -23,6 +23,14 @@ class BasePage:
         link = self.browser.find_element(*BasePageLocators.MAIN_PAGE)
         link.click()
 
+    def get_element_text(self, name):
+        WebDriverWait(self.browser, 5).until(
+            EC.presence_of_element_located(name))
+        try:
+            return str(self.browser.find_element(*name).text)
+        except NoSuchElementException:
+            return None
+
     def is_element_present(self, how, what):
         try:
             self.browser.find_element(how, what)
