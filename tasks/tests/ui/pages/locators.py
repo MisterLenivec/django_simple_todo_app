@@ -13,3 +13,10 @@ class MainPageLocators:
     TASK_COUNT_STRING = (By.CLASS_NAME, 'task_count_string')
     TASK_COUNT = (By.CLASS_NAME, 'task_count')
     TASK_ROW = (By.CLASS_NAME, 'task_row')
+    TASK_NAME = (By.CLASS_NAME, 'task_name')
+    EDIT_TASK = (By.CSS_SELECTOR, '.edit')
+    DELETE_TASK = (By.CSS_SELECTOR, '.delete')
+
+
+class DeletePageLocators:
+    CONFIRM_DELETE = (By.CLASS_NAME, 'confirm_button')

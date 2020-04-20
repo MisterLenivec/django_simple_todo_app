@@ -1,5 +1,6 @@
+from selenium.common.exceptions import NoSuchElementException
 from .base_page import BasePage
-from .locators import MainPageLocators
+from .locators import MainPageLocators, DeletePageLocators
 from tasks.models import Task
 
 
@@ -30,8 +31,13 @@ class MainPage(BasePage):
         self.should_be_success_message_about_created_new_task()
         self.should_be_correct_success_message_text_about_created_new_task()
 
-    def check_created_task_on_page(self):
-        pass
+    def check_edit_button_is_present_with_correct_text(self):
+        self.should_be_edit_button_in_task_row()
+        self.should_be_correct_text_in_edit_button()
+
+    def check_delete_button_is_present_with_correct_text(self):
+        self.should_be_delete_button_in_task_row()
+        self.should_be_correct_text_in_delete_button()
 
     def should_be_main_url(self):
         assert "http://127.0.0.1:8000/" == self.browser.current_url, \
@@ -95,4 +101,70 @@ class MainPage(BasePage):
     def should_success_message_disappear(self):
         assert self.is_disappeared(
             *MainPageLocators.SUCCESS_MESSAGE
-        ), "Success message is not disappeared"
+        ), 'Success message is not disappeared'
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(
+            *MainPageLocators.SUCCESS_MESSAGE
+        ), 'Success message is presented, but should not be'
+
+    def check_number_of_created_task_on_page(self):
+        tasks_on_page = self.browser.find_elements(
+            *MainPageLocators.TASK_ROW
+        )
+        task_count_on_page = self.get_element_text(
+            MainPageLocators.TASK_COUNT
+        )
+        assert len(tasks_on_page) == int(task_count_on_page), \
+            'Tasks on page not equal task counter'
+
+    def should_be_correct_task_name(self, task_name):
+        assert self.get_element_text(
+            MainPageLocators.TASK_NAME
+        ) == task_name, 'Task name not equal created task name'
+
+    def should_be_edit_button_in_task_row(self):
+        assert self.is_element_present(
+            *MainPageLocators.EDIT_TASK
+        ), 'Edit task button is not presented, but should be'
+
+    def should_be_delete_button_in_task_row(self):
+        assert self.is_element_present(
+            *MainPageLocators.DELETE_TASK
+        ), 'Delete task button is not presented, but should be'
+
+    def should_be_correct_text_in_edit_button(self):
+        assert self.get_element_text(
+            MainPageLocators.EDIT_TASK
+        ) == 'Изменить', 'Edit button text is not correct, but should be'
+
+    def should_be_correct_text_in_delete_button(self):
+        assert self.get_element_text(
+            MainPageLocators.DELETE_TASK
+        ) == 'Удалить', 'Delete button text is not correct, but should be'
+
+    def edit_button_should_lead_to_edit_page(self):
+        self.browser.find_element(
+            *MainPageLocators.EDIT_TASK
+        ).click()
+        assert 'update_task' in self.browser.current_url, \
+            'Current url is not an edit task page'
+
+    def delete_button_should_lead_to_delete_page(self):
+        self.browser.find_element(
+            *MainPageLocators.DELETE_TASK
+        ).click()
+        assert 'delete_task' in self.browser.current_url, \
+            'Current url is not an delete task page'
+
+    def click_confirm_delete_tasks(self):
+        self.browser.find_element(
+            *DeletePageLocators.CONFIRM_DELETE
+        ).click()
+
+    def should_be_tasks_on_page_for_delete(self):  # refactor this later
+        try:
+            self.browser.find_element(*MainPageLocators.TASK_ROW)
+            return True
+        except NoSuchElementException:
+            return False

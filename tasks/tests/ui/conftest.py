@@ -20,7 +20,7 @@ def firefox_options():
     return fp
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="session")
 def browser(request):
     browser_name = request.config.getoption("browser_name")
     browser = None
