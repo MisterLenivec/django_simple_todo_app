@@ -1,6 +1,20 @@
-import pytest
+from django.conf import settings
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+import pytest
+import os
+
+
+@pytest.fixture(scope='session')
+def django_db_setup():
+    settings.DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('simple_todo_db_name'),
+        'USER': os.environ.get('simple_todo_db_user'),
+        'PASSWORD': os.environ.get('simple_todo_db_password'),
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
 
 
 def pytest_addoption(parser):

@@ -1,7 +1,7 @@
-from selenium.common.exceptions import NoSuchElementException
 from .base_page import BasePage
 from .locators import MainPageLocators, DeletePageLocators
 from tasks.models import Task
+from selenium.common.exceptions import NoSuchElementException
 
 
 class MainPage(BasePage):
@@ -10,8 +10,6 @@ class MainPage(BasePage):
             MainPageLocators.TASK_COUNT
         )
         task_count_in_database = Task.objects.all().count()
-        print(task_count_on_page)
-        print(task_count_in_database)
         assert int(task_count_on_page) == task_count_in_database, \
             'Number of tasks on page is not equal in the database'
 
@@ -38,6 +36,11 @@ class MainPage(BasePage):
     def check_delete_button_is_present_with_correct_text(self):
         self.should_be_delete_button_in_task_row()
         self.should_be_correct_text_in_delete_button()
+
+    def should_be_correct_task_name_and_description(self, title, descr):
+        self.should_be_correct_task_name(title)
+        self.create_task_title_should_be_correct_on_db(title)
+        self.create_task_description_should_be_correct_on_db(descr)
 
     def should_be_main_url(self):
         assert "http://127.0.0.1:8000/" == self.browser.current_url, \
@@ -168,3 +171,11 @@ class MainPage(BasePage):
             return True
         except NoSuchElementException:
             return False
+
+    def create_task_title_should_be_correct_on_db(self, task_name):
+        assert task_name == Task.objects.first().title, \
+            'Task name on db not equal created task name'
+
+    def create_task_description_should_be_correct_on_db(self, task_descr):
+        assert task_descr == Task.objects.first().description, \
+            'Task name on db not equal created task name'
