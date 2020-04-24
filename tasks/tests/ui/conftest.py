@@ -24,7 +24,7 @@ def pytest_addoption(parser):
 
 def chrome_options():
     options = Options()
-    # options.add_argument("--headless")  # No open browser
+    options.add_argument("--headless")  # No open browser
     options.add_argument("--window-size=1920x1080")
     return options
 

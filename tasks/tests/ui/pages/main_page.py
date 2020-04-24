@@ -161,9 +161,12 @@ class MainPage(BasePage):
             'Current url is not an delete task page'
 
     def click_confirm_delete_tasks(self):
-        self.browser.find_element(
-            *DeletePageLocators.CONFIRM_DELETE
-        ).click()
+        try:
+            self.browser.find_element(
+                *DeletePageLocators.CONFIRM_DELETE
+            ).click(), 'We\'re not on delete page or task is not present'
+        except NoSuchElementException:
+            pass
 
     def should_be_tasks_on_page_for_delete(self):  # refactor this later
         try:

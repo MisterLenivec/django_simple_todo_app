@@ -20,3 +20,8 @@ class MainPageLocators:
 
 class DeletePageLocators:
     CONFIRM_DELETE = (By.CLASS_NAME, 'confirm_button')
+    DANGER_MESSAGE = (By.CLASS_NAME, 'alert-danger')
+    QUESTION_MESSAGE = (By.CSS_SELECTOR, 'p')
+    QUESTION_TASK_TITLE = (By.CLASS_NAME, 'task')
+    CANCEL_BUTTON = (By.CLASS_NAME, 'cancel_button')
+    CONFIRM_DELETE_BUTTON = (By.CLASS_NAME, 'confirm_button')
