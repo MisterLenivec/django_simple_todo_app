@@ -175,10 +175,12 @@ class MainPage(BasePage):
         except NoSuchElementException:
             return False
 
-    def create_task_title_should_be_correct_on_db(self, task_name):
+    @staticmethod
+    def create_task_title_should_be_correct_on_db(task_name):
         assert task_name == Task.objects.first().title, \
             'Task name on db not equal created task name'
 
-    def create_task_description_should_be_correct_on_db(self, task_descr):
+    @staticmethod
+    def create_task_description_should_be_correct_on_db(task_descr):
         assert task_descr == Task.objects.first().description, \
             'Task name on db not equal created task name'

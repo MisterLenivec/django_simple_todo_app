@@ -20,12 +20,17 @@ class DeletePage(BasePage):
         self.should_be_success_message_on_main_page_after_delete_task()
         self.should_be_correct_success_message_text_about_delete_task()
 
-    def should_be_no_elements_on_db_or_main_page_after_delete_task(self):
+    def should_be_no_elements_on_db_or_main_page_after_del(self):
         self.should_be_no_task_on_main_page_after_delete()
         self.should_be_no_task_on_db_after_delete()
 
     def should_be_danger_message(self):
         assert self.is_element_present(
+            *DeletePageLocators.DANGER_MESSAGE
+        ), 'Danger message on delete page is not presented, but should be'
+
+    def should_not_be_danger_message(self):
+        assert self.is_not_element_present(
             *DeletePageLocators.DANGER_MESSAGE
         ), 'Danger message on delete page is not presented, but should be'
 
@@ -36,6 +41,11 @@ class DeletePage(BasePage):
 
     def should_be_question_message(self):
         assert self.is_element_present(
+            *DeletePageLocators.QUESTION_MESSAGE
+        ), 'Question message on delete page is not presented, but should be'
+
+    def should_not_be_question_message(self):
+        assert self.is_not_element_present(
             *DeletePageLocators.QUESTION_MESSAGE
         ), 'Question message on delete page is not presented, but should be'
 
@@ -100,6 +110,7 @@ class DeletePage(BasePage):
             *MainPageLocators.TASK_ROW
         ), 'Task is presented, but should not be'
 
-    def should_be_no_task_on_db_after_delete(self):
+    @staticmethod
+    def should_be_no_task_on_db_after_delete():
         assert Task.objects.all().count() == 0, \
             'Tasks on db not equal 0'
