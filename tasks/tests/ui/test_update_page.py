@@ -65,11 +65,49 @@ class TestCheckUpdatePage:
         self.update_page.cancel_button_should_lead_to_main_page()
         self.update_page.should_be_wrong_task_title(second_name)
 
-    # @pytest.mark.xfail(reasen='Should be update message(Negative check)')
-    # def test_update_message_on_update_page_is_not_present(self, browser):
-    #     name, email = get_fake_name_and_email()
-    #     self.page.create_task_with_title_and_description(name, email)
-    #     self.page.edit_button_should_lead_to_edit_page()
-    #     self.update_page = UpdatePage(browser, browser.current_url)
-    #     self.update_page.should_not_be_update_message()
-    #     self.update_page.browser.back()
+    @pytest.mark.xfail(reasen='Should be not correct updated task title')
+    def test_cancel_button_should_not_save_changes_negative(self, browser):
+        name, email = get_fake_name_and_email()
+        self.page.create_task_with_title_and_description(name, email)
+        self.page.edit_button_should_lead_to_edit_page()
+        self.update_page = UpdatePage(browser, browser.current_url)
+        second_name, second_email = get_fake_name_and_email()
+        self.update_page.should_be_edit_input_title(second_name)
+        self.update_page.cancel_button_should_lead_to_main_page()
+        self.update_page.should_be_correct_task_title(second_name)
+
+    @pytest.mark.django_db
+    def test_update_task_and_check_changes(self, browser):
+        name, email = get_fake_name_and_email()
+        self.page.create_task_with_title_and_description(name, email)
+        self.page.edit_button_should_lead_to_edit_page()
+        self.update_page = UpdatePage(browser, browser.current_url)
+        second_name, second_email = get_fake_name_and_email()
+        self.update_page.should_be_edit_task(second_name, second_email)
+        self.update_page.check_success_message_about_update_task()
+        self.update_page.should_be_correct_task_name_complete(second_name)
+        self.page.edit_button_should_lead_to_edit_page()
+        self.update_page.should_be_correct_update_task()
+        self.update_page.browser.back()
+
+    @pytest.mark.xfail(reasen='Should not be success update message in main')
+    def test_update_task_and_check_success_message_is_not_exist(self, browser):
+        name, email = get_fake_name_and_email()
+        self.page.create_task_with_title_and_description(name, email)
+        self.page.edit_button_should_lead_to_edit_page()
+        self.update_page = UpdatePage(browser, browser.current_url)
+        second_name, second_email = get_fake_name_and_email()
+        self.update_page.should_be_edit_task(second_name, second_email)
+        self.update_page.should_not_be_update_success_message()
+        self.update_page.browser.back()
+
+    @pytest.mark.xfail(reasen='Should not be task completed in main page')
+    def test_update_task_and_check_task_complete_does_not_exist(self, browser):
+        name, email = get_fake_name_and_email()
+        self.page.create_task_with_title_and_description(name, email)
+        self.page.edit_button_should_lead_to_edit_page()
+        self.update_page = UpdatePage(browser, browser.current_url)
+        second_name, second_email = get_fake_name_and_email()
+        self.update_page.should_be_edit_task(second_name, second_email)
+        self.update_page.should_not_be_task_name_complete()
+        self.update_page.browser.back()

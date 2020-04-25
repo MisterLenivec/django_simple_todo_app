@@ -14,6 +14,7 @@ class MainPageLocators:
     TASK_COUNT = (By.CLASS_NAME, 'task_count')
     TASK_ROW = (By.CLASS_NAME, 'task_row')
     TASK_NAME = (By.CLASS_NAME, 'task_name')
+    TASK_NAME_COMPLETE = (By.CLASS_NAME, 'task_name_complete')
     EDIT_TASK = (By.CSS_SELECTOR, '.edit')
     DELETE_TASK = (By.CSS_SELECTOR, '.delete')
 

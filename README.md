@@ -1,4 +1,4 @@
-# Самый обычный to do list на django.
+# Самый обычный to do list на django с тестами.
 
 #### simple to do app [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/MisterLenivec/django_simple_todo_app/blob/master/LICENSE)
 
@@ -9,4 +9,5 @@
 - Postgresql
 - Django unit tests
 - Selenium WebDriver
+- Pytest
 - Travis CI

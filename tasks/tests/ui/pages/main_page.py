@@ -92,7 +92,7 @@ class MainPage(BasePage):
         ).click()
 
     def should_be_success_message_about_created_new_task(self):
-        assert self.browser.find_element(
+        assert self.is_element_present(
             *MainPageLocators.SUCCESS_MESSAGE
         ), 'Success message is not presented, but should be'
 

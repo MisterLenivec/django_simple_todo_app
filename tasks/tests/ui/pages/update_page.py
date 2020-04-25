@@ -31,10 +31,25 @@ class UpdatePage(BasePage):
     def should_be_edit_task(self, task_name, task_descr):
         self.should_be_edit_input_title(task_name)
         self.should_be_edit_input_description(task_descr)
+        self.should_be_select_checkbox()
+        self.should_be_click_confirm_button_for_update_task()
+
+    def check_success_message_about_update_task(self):
+        self.should_be_update_success_message()
+        self.should_be_correct_update_success_message_text()
+
+    def should_be_correct_task_name_complete(self, task_name):
+        self.should_be_task_name_complete()
+        self.should_be_correct_update_text_in_task_title_in_main(task_name)
 
     def should_be_update_page_url(self):
         assert 'update_task' in self.browser.current_url, \
             "Update page url is not presented"
+
+    def should_be_correct_update_task(self):
+        self.should_be_correct_updated_input_title_on_db()
+        self.should_be_correct_updated_input_description_on_db()
+        self.should_be_correct_updated_checkbox_on_db()
 
     def should_be_update_message(self):
         assert self.is_element_present(
@@ -175,11 +190,83 @@ class UpdatePage(BasePage):
         description.clear()
         description.send_keys(task_descr)
 
+    def should_be_select_checkbox(self):
+        checkbox = self.browser.find_element(
+            *UpdatePageLocators.CHECKBOX
+        )
+        checkbox.click()
+        assert checkbox.get_attribute('checked') == 'true', \
+            'Checkbox is not selected, but should be'
+
+    def should_be_click_confirm_button_for_update_task(self):
+        self.browser.find_element(
+            *UpdatePageLocators.CONFIRM_UPDATE_BUTTON
+        ).click()
+        assert 'http://127.0.0.1:8000/' == self.browser.current_url, \
+            'Confirm button not lead to main page, but should be'
+
+    def should_be_update_success_message(self):
+        assert self.is_element_present(
+            *MainPageLocators.SUCCESS_MESSAGE
+        ), 'Success message about update task is not presented, but should be'
+
+    def should_not_be_update_success_message(self):
+        assert self.is_not_element_present(
+            *MainPageLocators.SUCCESS_MESSAGE
+        ), 'Success message about update task is not presented, ' \
+           'but should be negative check'
+
+    def should_be_correct_update_success_message_text(self):
+        assert 'Задача успешно обновлена!' == self.get_element_text(
+            MainPageLocators.SUCCESS_MESSAGE
+        ), 'Success message text about update task is not correct'
+
+    def should_be_task_name_complete(self):
+        assert self.is_element_present(
+            *MainPageLocators.TASK_NAME_COMPLETE
+        ), 'Task name complete is not presented, but should be'
+
+    def should_not_be_task_name_complete(self):
+        assert self.is_not_element_present(
+            *MainPageLocators.TASK_NAME_COMPLETE
+        ), 'Task name complete is presented, but it passed if not'
+
+    def should_be_correct_update_text_in_task_title_in_main(self, task_name):
+        assert task_name == self.get_element_text(
+            MainPageLocators.TASK_NAME_COMPLETE
+        ), 'Task title (completed) text is not correct, but should be'
+
+    def should_be_correct_updated_input_title_on_db(self):
+        assert Task.objects.first().title == self.browser.find_element(
+            *UpdatePageLocators.INPUT_TITLE
+        ).get_attribute('value'), 'Updated text in input title is not equal ' \
+                                  'title text in database, but should be'
+
+    def should_be_correct_updated_input_description_on_db(self):
+        assert Task.objects.first().description == self.get_element_text(
+            UpdatePageLocators.INPUT_DESCRIPTION
+        ), 'Updated text in input description is not equal description text ' \
+           'in database, but should be'
+
+    def should_be_correct_updated_checkbox_on_db(self):
+        db_checkbox = str(Task.objects.first().complete).lower()
+        page_checkbox = str(self.browser.find_element(
+            *UpdatePageLocators.CHECKBOX
+        ).get_attribute('checked'))
+        assert db_checkbox == page_checkbox, 'Updated checkbox on database ' \
+            'not equal checkbox on page, but should be'
+
     def should_be_wrong_task_title(self, task_name):
         assert self.browser.find_element(
             *MainPageLocators.TASK_NAME
         ).get_attribute('value') != task_name, \
             'Task title is correct, but should not be'
+
+    def should_be_correct_task_title(self, task_name):
+        assert self.browser.find_element(
+            *MainPageLocators.TASK_NAME
+        ).get_attribute('value') == task_name, \
+            'Task title is not correct, but should be'
 
     def should_not_be_update_message(self):
         assert self.is_not_element_present(
