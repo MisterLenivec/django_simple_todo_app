@@ -31,9 +31,19 @@ class BasePage:
         except NoSuchElementException:
             return None
 
-    def is_element_present(self, how, what):
+    # def is_element_present(self, how, what):
+    #     try:
+    #         self.browser.find_element(how, what)
+    #     except NoSuchElementException:
+    #         return False
+    #     return True
+
+    def is_element_present(self, how, what, timeout=4):
         try:
-            self.browser.find_element(how, what)
+            WebDriverWait(self.browser, timeout).until(
+                EC.visibility_of_element_located((how, what)))
+        except TimeoutException:
+            return False
         except NoSuchElementException:
             return False
         return True

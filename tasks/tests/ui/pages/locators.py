@@ -25,3 +25,17 @@ class DeletePageLocators:
     QUESTION_TASK_TITLE = (By.CLASS_NAME, 'task')
     CANCEL_BUTTON = (By.CLASS_NAME, 'cancel_button')
     CONFIRM_DELETE_BUTTON = (By.CLASS_NAME, 'confirm_button')
+
+
+class UpdatePageLocators:
+    UPDATE_MESSAGE = (By.CLASS_NAME, 'alert-success')
+    INPUT_TITLE = (By.ID, 'id_title')
+    INPUT_DESCRIPTION = (By.ID, 'id_description')
+    LABEL_FOR_ID_COMPLETE = (By.CLASS_NAME, 'form-check-label')
+    CHECKBOX = (By.ID, 'id_complete')
+    TASK_CREATED = (By.ID, 'task_created')
+    TASK_UPDATED = (By.ID, 'task_updated')
+    TASK_CREATED_DATE = (By.ID, 'task_created_date')
+    TASK_UPDATED_DATE = (By.ID, 'task_updated_date')
+    CANCEL_BUTTON = (By.CLASS_NAME, 'cancel_button')
+    CONFIRM_UPDATE_BUTTON = (By.CLASS_NAME, 'confirm_button')

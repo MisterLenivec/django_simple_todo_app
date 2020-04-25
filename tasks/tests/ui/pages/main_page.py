@@ -43,8 +43,8 @@ class MainPage(BasePage):
         self.create_task_description_should_be_correct_on_db(descr)
 
     def should_be_main_url(self):
-        assert "http://127.0.0.1:8000/" == self.browser.current_url, \
-            "Main url is not presented"
+        assert 'http://127.0.0.1:8000/' == self.browser.current_url, \
+            'Main url is not presented'
 
     def should_be_input_title(self):
         assert self.is_element_present(
